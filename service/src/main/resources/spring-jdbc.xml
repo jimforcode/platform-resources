@@ -11,9 +11,10 @@
      	http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
-
-	<tx:annotation-driven />
-	<context:property-placeholder location="classpath:db.properties" />
+      <context:annotation-config />
+	  <context:component-scan base-package="cn.creatoo" />
+	  <tx:annotation-driven transaction-manager="transactionManager" />
+	  <context:property-placeholder location="classpath:db.properties" />
 	
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
@@ -32,43 +33,17 @@
 		<property name="maxActive">
 			<value>${jdbc.maxActive}</value>
 		</property>
-		<property name="proxyFilters">
-			<list>
-				<ref bean="stat-filter" />
-				<ref bean="wall-filter" />
-			</list>
-		</property>
 	</bean>
-	
-	<bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
-		<property name="slowSqlMillis" value="1000" />
-		<property name="logSlowSql" value="true" />
-		<property name="mergeSql" value="true" />
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="cn.creatoo.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
-
-	<bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">
-		<property name="dbType" value="mysql" />
-		<property name="config" ref="wall-filter-config" />
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis.xml" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:cn/creatoo/mapper/**/*.xml"></property>
 	</bean>
-
-	<bean id="wall-filter-config" class="com.alibaba.druid.wall.WallConfig">
-		<property name="multiStatementAllow" value="true" />
-	</bean>
-
-	<bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor"></bean>
-	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
-		<property name="patterns">
-			<list>
-				<value>cn.creatoo.controller.*</value>
-				<value>cn.creatoo.service.*</value>
-			</list>
-		</property>
-	</bean>
-	<aop:config>
-		<aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut"/>
-	</aop:config>
-
-	<bean id="transactionManager"
+ 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource">
 			<ref bean="dataSource" />
@@ -76,14 +51,4 @@
 
 	</bean>
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" value="classpath:mybatis.xml" />
-		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath:cn/creatoo/mapper/**/*.xml"></property>
-	</bean>
-
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="cn.creatoo.dao" />
-
-	</bean>
 </beans>

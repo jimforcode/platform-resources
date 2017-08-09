@@ -8,8 +8,8 @@
   <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /WEB-INF/applicationContext.xml,
-          classpath:applicationContext-security.xml,
+            <!--/WEB-INF/applicationContext.xml,-->
+            /WEB-INF/applicationContext-security.xml,
           classpath:spring-jdbc.xml
         </param-value>
     </context-param>
@@ -60,4 +60,8 @@
     <servlet-name>spring</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>/login.html</welcome-file>
+    </welcome-file-list>
  </web-app>

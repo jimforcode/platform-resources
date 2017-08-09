@@ -8,8 +8,8 @@
         <commentGenerator type="org.mybatis.generator.MyCommentGenerator">
         </commentGenerator>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.5.211:3306/eme_dev"
-                        userId="developer" password="developer" />
+                        connectionURL="jdbc:mysql://192.168.5.14:3306/sec_eme"
+                        userId="root" password="123456" />
         <javaModelGenerator targetPackage="com.sun3d.why.model"
                             targetProject="D:\project_idea\platformresources\pr\model\src\main\java\" />
         <sqlMapGenerator targetPackage="cn.creatoo.mapper.system"
@@ -17,9 +17,9 @@
         <javaClientGenerator targetPackage="com.sun3d.why.dao"
             targetProject="D:\project_idea\platformresources\pr\dao\src\main\java\" type="XMLMAPPER" />
 
-      <!--  <table tableName="score_search" domainObjectName="ScoreSearch"  enableCountByExample="false"
+       <table tableName="test" domainObjectName="TestEntity"  enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-        </table>-->
+        </table>
 
 
     </context>

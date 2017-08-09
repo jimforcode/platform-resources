@@ -15,21 +15,20 @@ import java.util.Iterator;
 /**
  * Created by liyd on 16/12/9.
  */
-public class CustomAccessDecisionManager implements AccessDecisionManager {
+public class Custom2AccessDecisionManager implements AccessDecisionManager {
 
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
-        //资源没有限定
-        if(configAttributes==null){
-            return;
-        }
-        if (authentication == null) {
-            throw new AccessDeniedException("当前访问没有权限");
-        }
 
         Iterator<ConfigAttribute> iterator = configAttributes.iterator();
         while (iterator.hasNext()) {
+
+            if (authentication == null) {
+                throw new AccessDeniedException("当前访问没有权限");
+            }
+
             ConfigAttribute configAttribute = iterator.next();
             String needCode = configAttribute.getAttribute();
+
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             for (GrantedAuthority authority : authorities) {
                 if (StringUtils.equals(authority.getAuthority(), needCode)) {

@@ -15,11 +15,25 @@ public class R extends HashMap<String,Object>{
         rs.put(RESULT_STATUS_KEY, RESULT_OK_VAL);
         return rs;
     }
+    public static R ok(Object object) {
+        R rs = new R();
+        rs.put(RESULT_STATUS_KEY, RESULT_OK_VAL);
+        rs.setDataVal(object);
+        return rs;
+    }
     public static R error() {
         R rs = new R();
         rs.put(RESULT_STATUS_KEY, RESULT_ERROR_VAL);
         return rs;
     }
+
+    public static R error(String msg) {
+        R rs = new R();
+        rs.put(RESULT_STATUS_KEY, RESULT_ERROR_VAL);
+        rs.setMsgVal(msg);
+        return rs;
+    }
+
     public static R Unlogin() {
          R rs = new R();
          rs.put(RESULT_STATUS_KEY, RESULT_UNLOGIN_VAL);

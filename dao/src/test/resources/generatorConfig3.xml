@@ -4,21 +4,23 @@
     <classPathEntry
             location="E:\mybatis\mysql-connector-java-5.1.29.jar" />
     <context id="context1" targetRuntime="MyBatis3">
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <commentGenerator type="org.mybatis.generator.MyCommentGenerator">
+        </commentGenerator>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.5.14:3306/sec_eme"
-                        userId="root" password="123456" />
-        <javaModelGenerator targetPackage="cn.creatoo.model.test"
+                        connectionURL="jdbc:mysql://192.168.5.211:3306/eme_dev"
+                        userId="developer" password="developer" />
+        <javaModelGenerator targetPackage="com.sun3d.why.model.test"
                             targetProject="D:\project_idea\platformresources\pr\model\src\main\java\" />
         <sqlMapGenerator targetPackage="cn.creatoo.mapper.test"
                          targetProject="D:\project_idea\platformresources\pr\dao\src\main\java\" />
-        <javaClientGenerator targetPackage="cn.creatoo.dao.test"
+        <javaClientGenerator targetPackage="com.sun3d.why.dao.test"
             targetProject="D:\project_idea\platformresources\pr\dao\src\main\java\" type="XMLMAPPER" />
-        <table tableName="test" domainObjectName="Test"  enableCountByExample="false"
+
+       <table tableName="test" domainObjectName="TestEntity"  enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
-      <!--  <table tableName="sys_user" domainObjectName="SysUser"  enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-        </table>-->
+
 
     </context>
 </generatorConfiguration>

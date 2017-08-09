@@ -25,20 +25,24 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 public class StartUp {
     public static void main(String[] args) throws URISyntaxException {
         try {
+             String configStr="generatorConfig.xml";
+            if (ValidateGenerator.isGenerate(configStr)){
+                List<String> warnings = new ArrayList<String>();
+                boolean overwrite = true;
+                ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+                InputStream is = classloader.getResourceAsStream(configStr);
+                ConfigurationParser cp = new ConfigurationParser(warnings);
+                Configuration config = cp.parseConfiguration(is);
+                DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+                MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+                myBatisGenerator.generate(null);
+            }else{
+                System.out.print("####################    生成失败，请备份要覆盖的文件        #########################");
+            }
 
 
 
 
-
-            List<String> warnings = new ArrayList<String>();
-            boolean overwrite = true;
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            InputStream is = classloader.getResourceAsStream("generatorConfig3.xml");
-            ConfigurationParser cp = new ConfigurationParser(warnings);
-            Configuration config = cp.parseConfiguration(is);
-            DefaultShellCallback callback = new DefaultShellCallback(overwrite);
-            MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
-            myBatisGenerator.generate(null);
 
 
         } catch (SQLException e) {
@@ -50,6 +54,8 @@ public class StartUp {
         } catch (InvalidConfigurationException e) {
             e.printStackTrace();
         } catch (XMLParserException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

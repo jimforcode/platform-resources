@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/sys")
-public class SysPagesController {
+public class SysPagesController extends AbstractController{
 
 
     @RequestMapping("/user")
@@ -61,5 +61,9 @@ public class SysPagesController {
 
         response.setHeader("X-Frame-Options", "SAMEORIGIN");return  "/sys/test";
     }
-
+    @RequestMapping("/demo")
+    public  String demo(HttpServletResponse response){
+         logger.info(" 请求地址： {}","demo");
+        response.setHeader("X-Frame-Options", "SAMEORIGIN");return  "/sys/demo";
+    }
 }

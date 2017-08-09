@@ -1,8 +1,10 @@
 package cn.creatoo.security;
 
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,12 +21,16 @@ public class CustomAccessDeniedHandler extends AccessDeniedHandlerImpl {
         if (isAjaxRequest(request)){
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json; charset=utf-8");
-            response.getWriter().write("{\"status\":\"error\"}");
+            response.getWriter().write("{\"status\":\"error\",\"msg\":\"您没有访问的权限!\"}");
             response.getWriter().close();
         }else{
+            response.setHeader("X-Frame-Options", "SAMEORIGIN");
             super.handle(request, response, accessDeniedException);
         }
     }
+
+
+
 
     private boolean isAjaxRequest(HttpServletRequest request) {
         String header = request.getHeader("X-Requested-With");

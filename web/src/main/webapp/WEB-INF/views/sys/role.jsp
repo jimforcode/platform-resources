@@ -36,6 +36,7 @@
 			<sec:authorize url='sys:role:list,sys:role:info'>
 			<div class="form-group col-sm-2">
 				<input type="text" class="form-control" v-model="q.roleName" @keyup.enter="query" placeholder="角色名称">
+
 			</div>
 				<a class="btn btn-default" @click="query">查询</a>
 			</sec:authorize>
@@ -89,3 +90,5 @@
 <script src="${path}/js/sys/role.js?_${date.systemTime}"></script>
 </body>
 </html>
+
+<a href="${path}/sys/demo">sys/demo</a>

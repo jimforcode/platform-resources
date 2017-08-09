@@ -324,11 +324,11 @@
                 <version>${mysql-connector-java.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
-          <!--  <dependency>
+            <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
                 <version>${ch.qos.logback.version}</version>
-            </dependency>-->
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

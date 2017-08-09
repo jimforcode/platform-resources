@@ -44,13 +44,5 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 
-	<!--  redis share session   start
-
-<context:annotation-config /> -->
-<bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration" />
-
-
-<bean class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory"/>
-	<!--     redis share session   end -->
 
 </beans>

@@ -34,16 +34,15 @@ public class SysLoginController {
 			e.printStackTrace();
 
 			if (e instanceof UsernameNotFoundException){
-
-				return R.error().setMsgVal("账号或密码不对");
+				return R.error("账号或密码不对") ;
 			}
 			if(e instanceof BadCredentialsException){
-				return R.error().setMsgVal("账号或密码不对");
+				return R.error("账号或密码不对");
 			}
 			if(e instanceof DisabledException){
-				return R.error().setMsgVal("用户已被禁用");
+				return R.error("用户已被禁用");
 			}
-			return R.error().setMsgVal("用户验证失败！请联系管理员");
+			return R.error("用户验证失败！请联系管理员");
 		}
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		HttpSession session = request.getSession();
